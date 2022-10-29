@@ -21,7 +21,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 login.init_app(app)
 
-login.login_view = 'logMeIn'
+login.login_view = 'routes.logMeIn'
 
 
 from . import routes

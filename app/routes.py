@@ -26,7 +26,7 @@ def test():
 def signMeup():
     form= UserCreationForm()
     if request.method == "POST":
-        if form.validate():#recently added whole page. checked for functionality? y/n< >evan
+        if form.validate():#recently added login function. checked for functionality? y/n< >evan
             username = form.username.data
             first_name = form.first_name.data
             last_name = form.last_name.data
@@ -41,7 +41,7 @@ def signMeup():
 
             flash('Shopper registered!', 'success')
 
-            return redirect(url_for('auth.logMeIn'))#checked y/n <> evan
+            return render_template('login.html')#checked y/n <> evan
         else:
             flash('You are not valid. Please try once more.')  
     return render_template('signup.html', form=form)
@@ -73,5 +73,6 @@ def logMeIn():
 
 @app.route('/logout')
 def logMeOut():
+    flash('Thank you for shopping with us!', 'secondary')
     logout_user()
-    return redirect(url_for('auth.logMeIn'))
+    return render_template('index.html')
