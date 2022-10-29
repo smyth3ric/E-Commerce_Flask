@@ -10,8 +10,10 @@
     {{ form.hidden_tag() }}
 
 
-
+    <!-- recently added first and last name. checked for functionality? y/n< >evan -->
     {{ form.username(class='form-control', placeholder='Username') }}
+    {{ form.first_name(class='form-control', placeholder='First Name') }}
+    {{ form.last_name(class='form-control', placeholder='Last Name') }}
     {{ form.email(class='form-control', placeholder='Email') }}
     {{ form.password(class='form-control', placeholder='Password') }}
     {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
