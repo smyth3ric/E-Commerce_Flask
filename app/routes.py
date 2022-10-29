@@ -1,10 +1,11 @@
 
 from app import app
-from dataclasses import dataclass
 from flask import Blueprint, render_template, request, redirect, url_for,flash
 from flask_login import login_user, logout_user, current_user
 from app.forms import UserCreationForm
 from app.forms import UserLoginForm
+from .models import User #recently added whole page. checked for functionality? y/n< >evan
+from werkzeug.security import check_password_hash #recently added whole page. checked for functionality? y/n< >evan
 
 
 
@@ -24,23 +25,25 @@ def test():
 @app.route('/signup', methods=["GET", "POST"])
 def signMeup():
     form= UserCreationForm()
-    # if request.method == "POST":
-    #     if form.validate():
-    #         username = form.username.data
-    #         email= form.email.data
-    #         password= form.password.data
+    if request.method == "POST":
+        if form.validate():#recently added whole page. checked for functionality? y/n< >evan
+            username = form.username.data
+            first_name = form.first_name.data
+            last_name = form.last_name.data
+            email = form.email.data
+            password = form.password.data
 
-    #         print(username, email, password)
+            #add user to database
+            user = User(username, first_name, last_name, email, password)
+            
+            #add instance to SQL
+            user.saveToDB()
 
-    #         # #add user to database
-    #         # user = User(username, email, password)
-    #         # #add instance to SQL
-            # user.saveToDB(user)
+            flash('Shopper registered!', 'success')
 
-            # flash('Successfully created user!', 'success')
-
-            # return redirect(url_for('auth.logMeIn'))
-
+            return redirect(url_for('auth.logMeIn'))#checked y/n <> evan
+        else:
+            flash('You are not valid. Please try once more.')  
     return render_template('signup.html', form=form)
 
 
@@ -48,23 +51,23 @@ def signMeup():
 @app.route('/login', methods = ["GET", "POST"])
 def logMeIn():
     form= UserLoginForm()
-    # if request.method == "POST":
-    #     if form.validate():
-    #         username = form.username.data
-    #         password= form.password.data
+    if request.method == "POST":
+        if form.validate():
+            username = form.username.data
+            password= form.password.data
 
-    #         print(username, password)
+            # print(username, password)
 
-    #         # user = User.query.filter_by(username=username).first()
-    #         # if user:
-            #     if check_password_hash(user.password, password):
-            #         print('Sucessfully logged in')
-            #         login_user(user)
-            #         return redirect(url_for('homePage'))
-            #     else:
-            #         flash('Incorrect Password!', 'danger')
-            # else:
-            #     flash('User does not exist!', 'danger')
+            user = User.query.filter_by(username=username).first()
+            if user:
+                if check_password_hash(user.password, password):
+                    # print('Sucessfully logged in')
+                    login_user(user)
+                    return redirect(url_for('homePage'))
+                else:
+                    flash('Incorrect Password!', 'danger')
+            else:
+                flash('User does not exist!', 'danger')
 
     return render_template('login.html', form=form)
 
@@ -72,4 +75,3 @@ def logMeIn():
 def logMeOut():
     logout_user()
     return redirect(url_for('auth.logMeIn'))
-
