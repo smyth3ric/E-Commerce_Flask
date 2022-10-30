@@ -43,15 +43,15 @@ class User(db.Model, UserMixin):
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    product_name = db.Column(db.String(50), nullable=False, unique=True)
+    item = db.Column(db.String(50), nullable=False, unique=True)
     # price = db.Column(db.Numeric(8,2), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     img_url = db.Column(db.String(500), nullable=False)
     description = db.Column(db.String(5000), nullable=False)
 
-    def __init__(self, id, product_name, quantity, img_url, description):
+    def __init__(self, id, item, quantity, img_url, description):
         self.id = id
-        self.product_name = product_name
+        self.item = item
         # self.price = price
         self.quantity = quantity
         self.img_url = img_url
