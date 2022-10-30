@@ -4,6 +4,7 @@ import requests
 from flask import Blueprint, render_template, request, redirect, url_for,flash
 from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import UserCreationForm, UserLoginForm, ItemForm  #modified import. checked for functionality? y/n< >evan
+from app.models import Product
 from .models import Product, User, db #recently added imports. checked for functionality? y/n< >evan
 from werkzeug.security import check_password_hash #recently added import. checked for functionality? y/n< >evan
 
@@ -35,27 +36,32 @@ def items():
             response = requests.get(url)
             if response.ok:
                 data = response.json()
-                item_dict = {}
-                equipments = data['data']
-                for entry in equipments:
-                    inStock = item_dict[equipments] = {
-                        'name': entry['name'],
-                        'quantity': entry['id'],
-                        'description': entry['description'],
-                        'image': entry['image']
-                    }
-                    return inStock
-            item = Product.query.filter_by(item=dict['name']).first()
-            if item:
+                # item_dict = {}
+                # equipments = data['data']['equipment']
+                # for entry in equipments:
+                dict[item.title()] = {
+                    'name': data['data']['name'],
+                    'quantity': data['data']['id'],
+                    'image': data['data']['image'],
+                    'description': data['data']['description']
+                }
+                name = dict[item.title()]['name']
+                quantity = dict[item.title()]['quantity']
+                image = dict[item.title()]['image']
+                description = dict[item.title()]['description']
+                
+                
+            items = Product.query.filter_by(item=item).first()
+            if items:
                 pass
             else:
-                item = Product(dict['name'], dict['quantity'],dict['image'],dict['description'])
+                items = Product(name, quantity, image, description)
 
                 db.session.add(item)
                 db.session.commit()
-            dict['id'] = item.id
-            return render_template('items.html', x=form, item=dict)
-    return render_template('items.html', x=form, item=dict)
+            dict['id'] = items.id
+            return render_template('items.html', x=form, item=item)
+    return render_template('items.html', x=form, item=item)
 
 
 #recently added cart route. checked for functionality? y/n< >evan
