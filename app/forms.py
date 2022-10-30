@@ -11,13 +11,16 @@ class UserCreationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('SUBMIT')
+    submit = SubmitField('Submit')
 
 class UserLoginForm(FlaskForm):
     username = StringField('Username',validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+class ItemForm(FlaskForm):
+    item = StringField('Item', validators=[DataRequired()])
+    submit = SubmitField()
 
 
 
