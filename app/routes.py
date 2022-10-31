@@ -4,10 +4,9 @@ import json
 import requests
 from flask import Blueprint, render_template, request, redirect, url_for,flash
 from flask_login import login_required, login_user, logout_user, current_user
-from app.forms import UserCreationForm, UserLoginForm, ItemForm  #modified import. checked for functionality? y/n< >evan
+from .forms import UserCreationForm, UserLoginForm, ItemForm, Add2cart  #modified import. checked for functionality? y/n< >evan
 from .models import Product, User, db #recently added imports. checked for functionality? y/n< >evan
 from werkzeug.security import check_password_hash #recently added import. checked for functionality? y/n< >evan
-
 
 
 
@@ -68,11 +67,11 @@ def items():
 
 
 #recently added cart route. checked for functionality? y/n< >evan
-@app.route('/cart')
+@app.route('/cart', methods =["POST"])
 @login_required
 def cart():
-    # item = current_user.add_2_cart.all()
-    return render_template('cart.html')
+    # carts = current_user.add_2_cart.all()
+    return render_template('cart.html', carts=carts)
 
 
 @app.route('/signup', methods=["GET", "POST"])
