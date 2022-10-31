@@ -22,5 +22,5 @@ class ItemForm(FlaskForm):
     item = StringField('Item', validators=[DataRequired()])
     submit = SubmitField()
 
-
-
+class Add2cart(FlaskForm):
+    submit = SubmitField()

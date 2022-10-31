@@ -25,6 +25,11 @@
             <p class="card-text">{{item.description}}</p>
             <p class="card-text-foot">QTY: {{item.quantity}}</p>
         </div>
+        {% if current_user.is_authenticated %}
+        <div class="ad2c-btn">
+            <button onclick="add({cart})" type="button" class="btn btn-primary">Add to Cart</button>
+          </div>
+        {% endif %}  
     </div>
     {% endif %}
 
