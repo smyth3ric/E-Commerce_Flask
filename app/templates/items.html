@@ -17,29 +17,17 @@
     {% if item %}
 
     <div class="card-st mx-auto"
-        style="width: 18rem; border-radius: 20px; border: solid; border-color: black; background-color: rgba(245, 245, 245, 0.4);">
-        
-
-
+        style="width: 25rem; border-radius: 20px; border: solid; border-color: black; background-color: rgba(245, 245, 245);">
+    
         <div class="card-body">
-            <img src="{{item.image}}" class="card-img-top" alt="item">
-            <!-- <li class="card-text-head">XP: {{item.name.title()}}</li> -->
-            <h5 class="card-title">{{item.name.title()}}</h5>
-            <p class="card-text">QTY: {{item.quantity.title()}}</p>
-            <p class="card-text">Info: {{item.description}}</p>
-            <!-- <p class="card-text">DEF: {{pokemon.base_def}}</p> -->
+            <img src="{{item.img_url}}" class="card-img-top" alt="item">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">QTY: {{item.quantity}}</p>
+            <p class="card-text">INFO:</p>
+            <p class="card-text">{{item.description}}</p>
         </div>
-        <!-- {% if current_user.is_authenticated %}
-        <div class="catch-butt">
-            <a class="btn btn-warning" href="{{ url_for('monsters.pokeFinder') }}">Catch</a>
-            <form method="POST" action="{{ url_for('monsters.catchPoke', id=pokemon.id) }}">
-                <input type="hidden" name="name-catch" value="{{pokemon.name.title()}}" />
-                <input id="cart-btn" type="submit" value="Add to Cart" name="cart-btn" />
-            </form>
-        </div>
-        {% endif %} -->
     </div>
     {% endif %}
 
-
+</div>
     {% endblock %}
