@@ -9,7 +9,7 @@ from .models import Product, User, db #recently added imports. checked for funct
 from werkzeug.security import check_password_hash #recently added import. checked for functionality? y/n< >evan
 
 
-
+#testing to add to git
 
 @app.route('/')
 def homePage():
