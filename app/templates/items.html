@@ -16,15 +16,14 @@
 
     {% if item %}
 
-    <div class="card-st mx-auto"
+    <div class="card mx-auto"
         style="width: 25rem; border: solid; border-color: black; background-color: rgba(245, 245, 245);">
     
         <div class="card-body">
             <img src="{{item.img_url}}" class="card-img-top" alt="item">
-            <h5 class="card-title">{{item.name}}</h5>
-            <p class="card-text">QTY: {{item.quantity}}</p>
-            <p class="card-text">INFO:</p>
+            <h5 class="card-title">{{item.item.upper()}}</h5>
             <p class="card-text">{{item.description}}</p>
+            <p class="card-text-foot">QTY: {{item.quantity}}</p>
         </div>
     </div>
     {% endif %}

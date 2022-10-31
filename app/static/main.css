@@ -52,8 +52,18 @@ body{
     align-content: space-around;
 }
 
+.card-title{
+    padding-top: 10px;
+    text-decoration: underline;
+}
+
 .card-text{
     padding: 10px;
+}
+
+.card-text-foot{
+    display: flex;
+    justify-content: right;
 }
 
 /* .nav-header{

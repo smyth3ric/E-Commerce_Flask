@@ -16,9 +16,12 @@ def homePage():
     return render_template('index.html')
 
 #recently added items route. checked for functionality? y/n< >evan
-@app.route('/wares') 
-def search():
-    return render_template('wares.html')
+@app.route('/wares', methods=["GET"]) 
+def wares():
+    
+    items = Product.query.all()
+    
+    return render_template('wares.html', items=items)
     
 
 
