@@ -1,22 +1,33 @@
-import requests
-
-def test():
+# import requests
+# from app.models import Product
+# def test():
     
-    url = f'https://botw-compendium.herokuapp.com/api/v2/entry/lizal_bow'
-    response = requests.get(url)
-    if response.ok:
-        data = response.json()
-        # item_dict = {}
-        # equipments = data['data']['equipment']
-        # for entry in equipments:
-        dict = {
-            'name': data['data']['name'],
-            'quantity': data['data']['id'],
-            'description': data['data']['description'],
-            'image': data['data']['image']
-        }
-        return dict
-print(test())
+#     url = f'https://botw-compendium.herokuapp.com/api/v2/entry/lizal_bow'
+#     response = requests.get(url)
+#     if response.ok:
+#         data = response.json()
+#         # item_dict = {}
+#         # equipments = data['data']['equipment']
+#         # for entry in equipments:
+#         dict = {
+#             'name': data['data']['name'],
+#             'quantity': data['data']['id'],
+#             'description': data['data']['description'],
+#             'image': data['data']['image']
+#         }
+#         return dict
+# print(test())
+# def test():
+    
+#     q1 = Product.query.filter_by('id')
+#     pull = {}
+#     if request.method == "GET":
+#         for q in q1:
+#             q = {
+#                 'ID': pull,
+#             }
+#             return dict
+# print(test())
 # @app.route('/items', methods=["GET","POST"])
 # def items():
 #     form = ItemForm()
