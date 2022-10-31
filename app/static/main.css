@@ -7,6 +7,7 @@ body{
 .container{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .finder{
@@ -49,6 +50,10 @@ body{
     background-color: rgb(72, 91, 39);
     align-items: center;
     align-content: space-around;
+}
+
+.card-text{
+    padding: 10px;
 }
 
 /* .nav-header{

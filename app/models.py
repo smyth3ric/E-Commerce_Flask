@@ -7,8 +7,8 @@ from datetime import datetime
 db = SQLAlchemy()
 
 cart = db.Table('cart',
-    db.Column('product_id', db.Integer, db.ForeignKey('product.id')),
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+    db.Column('product_id', db.Integer, db.ForeignKey('product.id'),nullable=False),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'),nullable=False)
 )
 
 class User(db.Model, UserMixin):
@@ -37,22 +37,19 @@ class User(db.Model, UserMixin):
         db.session.commit()
     
     def add2cart(self, item):
-        self.cartAdd.append(item)
+        self.add_2_cart.append(item)
         db.session.commit()
 
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String(50), nullable=False, unique=True)
-    # price = db.Column(db.Numeric(8,2), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     img_url = db.Column(db.String(500), nullable=False)
     description = db.Column(db.String(5000), nullable=False)
 
-    def __init__(self, id, item, quantity, img_url, description):
-        self.id = id
+    def __init__(self, item, quantity, img_url, description):
         self.item = item
-        # self.price = price
         self.quantity = quantity
         self.img_url = img_url
         self.description = description

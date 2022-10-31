@@ -1,10 +1,10 @@
 
 from app import app
+import json
 import requests
 from flask import Blueprint, render_template, request, redirect, url_for,flash
 from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import UserCreationForm, UserLoginForm, ItemForm  #modified import. checked for functionality? y/n< >evan
-from app.models import Product
 from .models import Product, User, db #recently added imports. checked for functionality? y/n< >evan
 from werkzeug.security import check_password_hash #recently added import. checked for functionality? y/n< >evan
 
@@ -16,9 +16,9 @@ def homePage():
     return render_template('index.html')
 
 #recently added items route. checked for functionality? y/n< >evan
-@app.route('/search') 
+@app.route('/wares') 
 def search():
-    return render_template('search.html')
+    return render_template('wares.html')
     
 
 
@@ -27,9 +27,9 @@ def search():
 def items():
     form = ItemForm()
     dict = {}
-    print('front-front')
+    # print('front-front')
     if request.method == "POST":
-        print('front')
+        # print('front')
         if form.validate():
             item = form.item.data
             url = f'https://botw-compendium.herokuapp.com/api/v2/entry/{item}'
@@ -47,28 +47,28 @@ def items():
                 }
                 name = dict[item.title()]['name']
                 quantity = dict[item.title()]['quantity']
-                image = dict[item.title()]['image']
+                img_url = dict[item.title()]['image']
                 description = dict[item.title()]['description']
                 
                 
-            items = Product.query.filter_by(item=item).first()
-            if items:
-                pass
-            else:
-                items = Product(name, quantity, image, description)
+                item = Product.query.filter_by(item=item).first()
+                if item:
+                    pass
+                else:
+                    item = Product(name, quantity, img_url, description)
 
-                db.session.add(item)
-                db.session.commit()
-            dict['id'] = items.id
-            return render_template('items.html', x=form, item=item)
-    return render_template('items.html', x=form, item=item)
+                    db.session.add(item)
+                    db.session.commit()
+                dict['id'] = item.id
+                return render_template('items.html', x=form, item=item)
+    return render_template('items.html', x=form)
 
 
 #recently added cart route. checked for functionality? y/n< >evan
 @app.route('/cart')
 @login_required
 def cart():
-    # item = current_user.cartAdd.all()
+    # item = current_user.add_2_cart.all()
     return render_template('cart.html')
 
 
@@ -94,7 +94,7 @@ def signMeup():
             return render_template('login.html')#checked y/n <> evan
         else:
             flash('You are not valid. Please try once more.')  
-    return render_template('signup.html', form=form)
+    return render_template('signup.html', s=form)
 
 
  #recently added login function. checked for functionality? y/n< >evan
@@ -117,7 +117,7 @@ def logMeIn():
             else:
                 flash('User does not exist!', 'danger')
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', l=form)
 
 @app.route('/logout')
 def logMeOut():
